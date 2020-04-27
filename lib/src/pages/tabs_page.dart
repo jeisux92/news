@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/src/pages/tab1_page.dart';
+import 'package:news/src/pages/tab2_page.dart';
 import 'package:news/src/services/news_service.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,6 @@ class _TabsPageState extends State<TabsPage> {
     return ChangeNotifierProvider(
       create: (BuildContext context) => _NavigationModel(),
       child: Scaffold(
-        appBar: AppBar(),
         body: Center(
           child: _Pages(),
         ),
@@ -60,14 +60,13 @@ class _Pages extends StatelessWidget {
   Widget build(BuildContext context) {
     final navigationModel = Provider.of<_NavigationModel>(context);
     return PageView(
+      
       controller: navigationModel.pageController,
       //physics: BouncingScrollPhysics(),
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Tab1Page(),
-        Container(
-          color: Colors.green,
-        ),
+        Tab2Page(),
       ],
     );
   }

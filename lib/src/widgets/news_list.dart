@@ -31,6 +31,12 @@ class _New extends StatelessWidget {
         _TopBarCard(article, index),
         _TitleCard(article),
         _ImageCard(article),
+        _BodyCard(article),
+        _ButtonsCard(index),
+        SizedBox(
+          height: 10.0,
+        ),
+        Divider(),
       ],
     );
   }
@@ -80,6 +86,70 @@ class _ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
+        ),
+        child: Container(
+          child: article.urlToImage == null
+              ? Image(image: AssetImage('assets/images/no-image.png'))
+              : FadeInImage(
+                  placeholder: AssetImage('assets/images/giphy.gif'),
+                  image: NetworkImage(article.urlToImage),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BodyCard extends StatelessWidget {
+  final Article article;
+
+  _BodyCard(this.article);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Text(article.description != null ? article.description : ''),
+    );
+  }
+}
+
+class _ButtonsCard extends StatelessWidget {
+  final id;
+
+  _ButtonsCard(this.id);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: theme.accentColor,
+            child: Icon(Icons.star_border),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          SizedBox(width: 10.0,),
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: Colors.blue,
+            child: Icon(Icons.more),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
